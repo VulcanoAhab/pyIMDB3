@@ -6,6 +6,9 @@ from titleMiner import Miner
 class fromID():
     """
     """
+
+
+
     def __init__(self, titleId, **kwargs):
         """
         """
@@ -17,6 +20,12 @@ class fromID():
         #mined data container
         self._data={}
 
+    def _testData(self, key, valueFunc):
+        """
+        """
+        if key in self._data:return
+        self._data[key]=valueFunc()
+
     def loadPage(self):
         """
         """
@@ -27,9 +36,15 @@ class fromID():
     def pageTitle(self):
         """
         """
-        if not "page_title" in self._data:
-            self._data["page_title"]=self._drill.mineTitle()
+        self._testData("page_title", self._drill.minePageTitle)
         return self._data["page_title"]
+
+    @property
+    def mainCastList(self):
+        """
+        """
+        self._testData("cast_list", self._drill.mineMainCast)
+        return self._data["cast_list"]
 
 
 # ===== command line
@@ -43,6 +58,7 @@ def fromIDTest():
     titlePross=fromID(args.title_id)
     titlePross.loadPage()
     print("[+] Page title: ",titlePross.pageTitle)
+    print("[+] Cast list: ",titlePross.mainCastList)
 
 
 if __name__ == "__main__":
