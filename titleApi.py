@@ -45,6 +45,13 @@ class fromID():
         return self._data["title_bar"]
 
     @property
+    def posterLink(self):
+        """
+        """
+        self._testData("poster_link", self._drill.minePoster)
+        return self._data["poster_link"]
+
+    @property
     def mainCastList(self):
         """
         """
@@ -65,6 +72,7 @@ def fromIDTest():
     print("[+] Page title: ",titlePross.pageTitle)
     print("[+] Cast list: ",titlePross.mainCastList)
     print("[+] Title barDict: ", titlePross.titleBar)
+    print("[+] Poster link: ", titlePross.posterLink)
 
 
 if __name__ == "__main__":

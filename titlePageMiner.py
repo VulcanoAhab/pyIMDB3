@@ -1,7 +1,8 @@
 from lxml import html
 from personParsers import parsePersonId, parsePersonName
 from titleBarParsers import (parseDuration, parseTitle,
-                            parseReleaseYear, parseGenreList)
+                            parseReleaseYear, parseGenreList,
+                            parsePosterLink)
 
 class Miner():
     """
@@ -94,6 +95,12 @@ class Miner():
         titleBar["genres"]=parseGenreList(genreListText)
         return titleBar
 
+    def minePoster(self):
+        """
+        """
+        posterContainer=self._obj.xpath("//div[@class='poster']/a/img/@src")
+        posterLink=Miner._getEl(posterContainer, "poster link")
+        return parsePosterLink(posterLink)
 
     def mineMainCast(self):
         """

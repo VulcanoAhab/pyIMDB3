@@ -21,3 +21,9 @@ def parseGenreList(value):
     """
     if not isinstance(value, list) or not value:return []
     return [v.lower() for v in value]
+
+def parsePosterLink(value):
+    """
+    """
+    if not value: return None
+    return value.strip()
