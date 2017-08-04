@@ -1,13 +1,11 @@
 from titlePage import Title
-from titleMiner import Miner
+from titlePageMiner import Miner
 
 
 
 class fromID():
     """
     """
-
-
 
     def __init__(self, titleId, **kwargs):
         """
@@ -40,6 +38,13 @@ class fromID():
         return self._data["page_title"]
 
     @property
+    def titleBar(self):
+        """
+        """
+        self._testData("title_bar", self._drill.mineTitleBar)
+        return self._data["title_bar"]
+
+    @property
     def mainCastList(self):
         """
         """
@@ -59,6 +64,7 @@ def fromIDTest():
     titlePross.loadPage()
     print("[+] Page title: ",titlePross.pageTitle)
     print("[+] Cast list: ",titlePross.mainCastList)
+    print("[+] Title barDict: ", titlePross.titleBar)
 
 
 if __name__ == "__main__":
