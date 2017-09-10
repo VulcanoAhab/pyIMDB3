@@ -204,3 +204,5 @@ class Miner():
         """
         """
         _pk=".//div[@class='see-more inline canwrap']/a/span/text()"
+        _pkRawContainer=self._obj.xpath(_pk)
+        return [word.strip() for word in _pkRawContainer]

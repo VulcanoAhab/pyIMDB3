@@ -97,6 +97,13 @@ class TestPage(unittest.TestCase):
         """
         self.assertEqual(self._story, self._miner.mineStoryLine())
 
+    def test_plotKeywirds(self):
+        """
+        """
+        baseKeys=['time travel', 'delorean', 'time travel comedy',
+                  'time machine', 'future']
+        self.assertEqual(baseKeys, self._miner.mineMainPlotKeywords())
+
 # == command line
 if __name__ == "__main__":
     unittest.main()
