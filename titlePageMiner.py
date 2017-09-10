@@ -172,10 +172,10 @@ class Miner():
         """
         """
         _alsos='//*[@id="title_recs"]/div/div/div/div/div[@class="rec_item"]/a'
-        _alsosContaines=self._obj.xpath(_alsos)
-        if not len(_alsosContaines):return
+        _alsosContainers=self._obj.xpath(_alsos)
+        if not len(_alsosContainers):return
         _alsosGood=[]
-        for also in _alsosContaines:
+        for also in _alsosContainers:
             if also is None:continue
             _alsoDict={}
             movieLink=also.get("href")
@@ -191,3 +191,16 @@ class Miner():
                 _alsoDict["title"]=_title
             _alsosGood.append(_alsoDict)
         return _alsosGood
+
+    def mineStoryLine(self):
+        """
+        """
+        _desion='//*[@id="titleStoryLine"]/div[1]/p/text()'
+        _desionRawContainer=self._obj.xpath(_desion)
+        _desionRaw=Miner._getEl(_desionRawContainer, "StoryLine")
+        return _desionRaw.strip()
+
+    def mineMainPlotKeywords(self):
+        """
+        """
+        _pk=".//div[@class='see-more inline canwrap']/a/span/text()"

@@ -20,12 +20,15 @@ class TestPage(unittest.TestCase):
         #load resaul samples
         self._alsoFD=open("tests/alsoLikedSample.json", "r")
         self._also=json.load(self._alsoFD)
+        self._storyFD=open("tests/storyLineSample.txt", "r")
+        self._story=self._storyFD.read()
 
     def tearDown(self):
         """
         """
         self._fd.close()
         self._alsoFD.close()
+        self._storyFD.close()
 
     def test_pageTitle(self):
         """
@@ -88,6 +91,11 @@ class TestPage(unittest.TestCase):
         """
         """
         self.assertEqual(self._also, self._miner.minePeopleAlsoLiked())
+
+    def test_storyLine(self):
+        """
+        """
+        self.assertEqual(self._story, self._miner.mineStoryLine())
 
 # == command line
 if __name__ == "__main__":
