@@ -1,4 +1,4 @@
-import sys,os
+import sys,os, json
 direname=os.path.dirname
 absolPath=os.path.abspath
 addPath=absolPath(direname(direname(absolPath(__file__))))
@@ -17,11 +17,15 @@ class TestPage(unittest.TestCase):
         self._html=self._fd.read()
         self._miner=Miner()
         self._miner.setPage(self._html)
+        #load resaul samples
+        self._alsoFD=open("tests/alsoLikedSample.json", "r")
+        self._also=json.load(self._alsoFD)
 
     def tearDown(self):
         """
         """
         self._fd.close()
+        self._alsoFD.close()
 
     def test_pageTitle(self):
         """
@@ -80,6 +84,10 @@ class TestPage(unittest.TestCase):
             'popularity': 228}
         self.assertEqual(_baseScores, self._miner.mineScores())
 
+    def test_peopleAlsoLiked(self):
+        """
+        """
+        self.assertEqual(self._also, self._miner.minePeopleAlsoLiked())
 
 # == command line
 if __name__ == "__main__":

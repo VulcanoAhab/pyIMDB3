@@ -1,10 +1,11 @@
 from lxml import html
 from personParsers import parsePersonId, parsePersonName
+from movieParsers import parseMovieId
 from titleBarParsers import (parseDuration, parseTitle,
                             parseReleaseYear, parseGenreList,
                             parsePosterLink)
 
-from scoresParsers import parseReviewsCount
+from scoresBarParsers import parseReviewsCount
 
 class Miner():
     """
@@ -166,3 +167,27 @@ class Miner():
         if _popularityRankRaw:
             scoresDict["popularity"]=parseReviewsCount(_popularityRankRaw,"(")
         return scoresDict
+
+    def minePeopleAlsoLiked(self):
+        """
+        """
+        _alsos='//*[@id="title_recs"]/div/div/div/div/div[@class="rec_item"]/a'
+        _alsosContaines=self._obj.xpath(_alsos)
+        if not len(_alsosContaines):return
+        _alsosGood=[]
+        for also in _alsosContaines:
+            if also is None:continue
+            _alsoDict={}
+            movieLink=also.get("href")
+            if not movieLink:continue
+            _alsoDict["imdb_id"]=parseMovieId(movieLink)
+            _image=Miner._getElFromParent(also, "./img",
+                                        "Also liked posters")
+            _poster=_image.get("src")
+            if _poster:
+                _alsoDict["poster"]=_poster
+            _title=_image.get("title")
+            if _title:
+                _alsoDict["title"]=_title
+            _alsosGood.append(_alsoDict)
+        return _alsosGood
