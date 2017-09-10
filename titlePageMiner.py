@@ -165,5 +165,4 @@ class Miner():
             scoresDict["reviews_count"]["critic"]=_criticRevParsedCount
         if _popularityRankRaw:
             scoresDict["popularity"]=parseReviewsCount(_popularityRankRaw,"(")
-
-        print(scoresDict)
+        return scoresDict
