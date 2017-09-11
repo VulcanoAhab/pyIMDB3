@@ -1,3 +1,4 @@
+
 from lxml import html
 from personParsers import parsePersonId, parsePersonName
 from movieParsers import parseMovieId
@@ -6,6 +7,7 @@ from titleBarParsers import (parseDuration, parseTitle,
                             parsePosterLink)
 
 from scoresBarParsers import parseReviewsCount
+from tagLineParsers import parseCoverTagLine
 
 class Miner():
     """
@@ -206,3 +208,10 @@ class Miner():
         _pk=".//div[@class='see-more inline canwrap']/a/span/text()"
         _pkRawContainer=self._obj.xpath(_pk)
         return [word.strip() for word in _pkRawContainer]
+
+    def mineTagLines(self):
+        """
+        """
+        _tags=".//h4[contains(text(), 'Taglines')]/parent::div[@class='txt-block']"
+        _tagsRaw=self._obj.xpath(_tags)
+        print(parseCoverTagLine(_tagsRaw[0].text_content()))

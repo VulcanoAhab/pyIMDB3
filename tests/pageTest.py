@@ -104,6 +104,11 @@ class TestPage(unittest.TestCase):
                   'time machine', 'future']
         self.assertEqual(baseKeys, self._miner.mineMainPlotKeywords())
 
+    def test_tagLines(self):
+        """
+        """
+        self._miner.mineTagLines()
+
 # == command line
 if __name__ == "__main__":
     unittest.main()
