@@ -214,4 +214,10 @@ class Miner():
         """
         _tags=".//h4[contains(text(), 'Taglines')]/parent::div[@class='txt-block']"
         _tagsRaw=self._obj.xpath(_tags)
-        print(parseCoverTagLine(_tagsRaw[0].text_content()))
+        _tags=[]
+        for _tagRaw in _tagsRaw:
+            if not _tagRaw or not _tagRaw.text_content(): continue
+            tag=parseCoverTagLine(_tagRaw.text_content())
+            print("#TAG :", tag)
+            _tags.append(tag)
+        return _tags
