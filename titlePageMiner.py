@@ -216,8 +216,7 @@ class Miner():
         _tagsRaw=self._obj.xpath(_tags)
         _tags=[]
         for _tagRaw in _tagsRaw:
-            if not _tagRaw or not _tagRaw.text_content(): continue
+            if not len(_tagRaw) or not _tagRaw.text_content(): continue
             tag=parseCoverTagLine(_tagRaw.text_content())
-            print("#TAG :", tag)
             _tags.append(tag)
         return _tags
