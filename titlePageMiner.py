@@ -220,3 +220,21 @@ class Miner():
             tag=parseCoverTagLine(_tagRaw.text_content())
             _tags.append(tag)
         return _tags
+
+    def mineDetails(self):
+        """
+        """
+        inlineTexts=[
+        {text:"Filming Locations:", "xpath":""},
+        {text:"Country:", "xpath":""},
+        "Language:",
+        "Release Date:",
+        "Also Known As:",
+        "Budget:",
+        "Opening Weekend:",
+        "Gross:",
+        "Production Co:",
+        "Runtime:",
+        "Color:",
+        ]
+        _details=".//div[@id='titleDetails']"
